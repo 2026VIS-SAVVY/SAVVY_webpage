@@ -149,7 +149,11 @@ function vitePluginManusDebugCollector(): Plugin {
   };
 }
 
-const plugins = [vue(), tailwindcss(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
+const isGitHubPages = process.env.GITHUB_PAGES === 'true';
+const plugins = isGitHubPages
+  ? [vue(), tailwindcss()]
+  : [vue(), tailwindcss(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
+
 
 export default defineConfig({
   base: process.env.GITHUB_PAGES === 'true' ? '/SAVVY_webpage/' : '/',
