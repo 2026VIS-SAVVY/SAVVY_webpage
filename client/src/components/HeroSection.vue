@@ -84,7 +84,7 @@ const navLinks = [
 .nav-link {
   display: inline-block;
   padding: 8px 16px;
-  border: none;
+  border: 2px solid transparent;
   border-radius: 6px;
   color: #333333;
   background-color: #ffffff;
@@ -104,7 +104,7 @@ const navLinks = [
   background-color: #ffffff;
   color: #000000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 2px solid #42b883;
+  border-color: #42b883;
   transform: translateY(-2px);
 }
 
