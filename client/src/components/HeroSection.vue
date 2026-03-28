@@ -84,10 +84,10 @@ const navLinks = [
 .nav-link {
   display: inline-block;
   padding: 8px 16px;
-  border: 2px solid transparent;
-  border-radius: 4px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 6px;
   color: #333333;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: #ffffff;
   font-family: Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -95,6 +95,7 @@ const navLinks = [
   transition: all 0.3s;
   white-space: nowrap;
   position: relative;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10), 0 0.5px 1.5px rgba(0,0,0,0.07);
 }
 .nav-link::after {
   content: '';
