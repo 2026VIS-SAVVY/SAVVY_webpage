@@ -4,7 +4,22 @@
       <h2 class="sec-title">Dataset</h2>
       <div class="divider"></div>
 
-      <!-- Description -->
+      <!-- ① Dataset Processing -->
+      <h3 class="sub-title">Dataset Processing</h3>
+      <div class="processing-img-box">
+        <div class="processing-placeholder">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" class="ph-icon">
+            <rect x="4" y="8" width="40" height="32" rx="3"/>
+            <circle cx="16" cy="20" r="4"/>
+            <path d="M4 32 l10-8 8 6 8-10 14 12"/>
+          </svg>
+          <span>Dataset Processing Figure</span>
+          <span class="ph-hint">Replace with your dataset processing pipeline figure</span>
+        </div>
+      </div>
+
+      <!-- ② Dataset Description -->
+      <h3 class="sub-title">Dataset Description</h3>
       <p class="ds-desc">
         We collected a multimodal brain dataset from 31 healthy participants (16 male, 15 female;
         mean age 23.6 ± 1.2 years) while they watched instructional videos on three topics:
@@ -16,7 +31,6 @@
         establish ground-truth labels of three attention levels: high, medium, and low. The dataset
         contains over 4.5 million data points in total.
       </p>
-
 
       <!-- Partial release notice -->
       <div class="notice-box">
@@ -32,7 +46,7 @@
         </p>
       </div>
 
-      <!-- Download button -->
+      <!-- ③ Full ZIP download -->
       <div class="dl-wrap">
         <a
           class="dl-btn"
@@ -49,11 +63,101 @@
           Download Partial Dataset (ZIP, ~129 MB)
         </a>
       </div>
+
+      <!-- ④ Per-participant download cards -->
+      <div class="per-part-section">
+        <h3 class="sub-title" style="margin-top:2.8rem;">Individual Participant Data</h3>
+        <p class="ds-desc" style="margin-bottom:1.8rem;">
+          Download data for each participant individually. Each file contains synchronized EEG and fNIRS recordings for one session (~35–57 MB per file).
+        </p>
+
+        <div class="part-grid">
+          <a
+            v-for="p in currentPageParticipants"
+            :key="p.id"
+            :href="p.url"
+            :download="p.filename"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="part-card"
+          >
+            <div class="part-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="12" y1="18" x2="12" y2="12"/>
+                <polyline points="9 15 12 18 15 15"/>
+              </svg>
+            </div>
+            <div class="part-card-label">{{ p.name }}</div>
+            <div class="part-card-sub">{{ p.size }}</div>
+          </a>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" v-if="totalPages > 1">
+          <button
+            class="page-btn"
+            :disabled="currentPage === 1"
+            @click="currentPage--"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+          </button>
+          <button
+            v-for="p in totalPages"
+            :key="p"
+            class="page-btn"
+            :class="{ active: p === currentPage }"
+            @click="currentPage = p"
+          >{{ p }}</button>
+          <button
+            class="page-btn"
+            :disabled="currentPage === totalPages"
+            @click="currentPage++"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
     </div>
   </section>
 </template>
 
+<script setup>
+import { ref, computed } from 'vue'
 
+const PER_PAGE = 5
+
+const participants = [
+  { id: 1,  name: 'Subject 01',  filename: 'S1.csv',  size: '~35.6 MB', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663469704594/Zt6AJnE8mLkXJTaJ9vvXXE/S1_17b05725.csv' },
+  { id: 2,  name: 'Subject 02',  filename: 'S2.csv',  size: '~35.2 MB', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663469704594/Zt6AJnE8mLkXJTaJ9vvXXE/S2_b5dbdf1d.csv' },
+  { id: 3,  name: 'Subject 03',  filename: 'S3.csv',  size: '~33.9 MB', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663469704594/Zt6AJnE8mLkXJTaJ9vvXXE/S3_62afcac7.csv' },
+  { id: 4,  name: 'Subject 04',  filename: 'S4.csv',  size: '~35.6 MB', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663469704594/Zt6AJnE8mLkXJTaJ9vvXXE/S4_9e101c05.csv' },
+  { id: 5,  name: 'Subject 05',  filename: 'S5.csv',  size: '~38.5 MB', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663469704594/Zt6AJnE8mLkXJTaJ9vvXXE/S5_16d69269.csv' },
+  { id: 6,  name: 'Subject 06',  filename: 'S6.csv',  size: '~35.6 MB', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663469704594/Zt6AJnE8mLkXJTaJ9vvXXE/S6_7c5f59fb.csv' },
+  { id: 7,  name: 'Subject 07',  filename: 'S7.csv',  size: '~35.1 MB', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663469704594/Zt6AJnE8mLkXJTaJ9vvXXE/S7_0cab7c32.csv' },
+  { id: 8,  name: 'Subject 08',  filename: 'S8.csv',  size: '~34.3 MB', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663469704594/Zt6AJnE8mLkXJTaJ9vvXXE/S8_028176b7.csv' },
+  { id: 9,  name: 'Subject 09',  filename: 'S9.csv',  size: '~35.0 MB', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663469704594/Zt6AJnE8mLkXJTaJ9vvXXE/S9_968dcbd9.csv' },
+  { id: 10, name: 'Subject 10',  filename: 'S10.csv', size: '~54.4 MB', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663469704594/Zt6AJnE8mLkXJTaJ9vvXXE/S10_473adc70.csv' },
+  { id: 11, name: 'Subject 11',  filename: 'S11.csv', size: '~38.2 MB', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663469704594/Zt6AJnE8mLkXJTaJ9vvXXE/S11_9e8be6e3.csv' },
+  { id: 12, name: 'Subject 12',  filename: 'S12.csv', size: '~38.9 MB', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663469704594/Zt6AJnE8mLkXJTaJ9vvXXE/S12_084410cf.csv' },
+  { id: 13, name: 'Subject 13',  filename: 'S13.csv', size: '~51.0 MB', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663469704594/Zt6AJnE8mLkXJTaJ9vvXXE/S13_b7f3a9df.csv' },
+  { id: 14, name: 'Subject 14',  filename: 'S14.csv', size: '~34.9 MB', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663469704594/Zt6AJnE8mLkXJTaJ9vvXXE/S14_046177f9.csv' },
+  { id: 15, name: 'Subject 15',  filename: 'S15.csv', size: '~34.8 MB', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663469704594/Zt6AJnE8mLkXJTaJ9vvXXE/S15_3c4ac6d9.csv' },
+]
+
+const currentPage = ref(1)
+const totalPages = computed(() => Math.ceil(participants.length / PER_PAGE))
+const currentPageParticipants = computed(() => {
+  const start = (currentPage.value - 1) * PER_PAGE
+  return participants.slice(start, start + PER_PAGE)
+})
+</script>
 
 <style scoped>
 .sec-title {
@@ -65,6 +169,60 @@
   margin-bottom: 12px;
 }
 
+.sub-title {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  max-width: 820px;
+  margin: 0 auto 1.2rem;
+  letter-spacing: 0.01em;
+}
+
+/* Processing image placeholder */
+.processing-img-box {
+  max-width: 820px;
+  margin: 0 auto 2.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.processing-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--muted);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.ph-icon {
+  width: 52px;
+  height: 52px;
+  opacity: 0.35;
+  margin-bottom: 0.4rem;
+}
+
+.processing-placeholder span {
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.ph-hint {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  opacity: 0.65;
+}
+
 .ds-desc {
   font-family: Arial, sans-serif;
   font-size: 16px;
@@ -74,7 +232,6 @@
   margin: 0 auto 2.5rem;
   text-align: left;
 }
-
 
 /* Notice box */
 .notice-box {
@@ -105,14 +262,13 @@
   margin: 0;
 }
 
-.notice-box strong {
-  color: #4ade80;
-}
+.notice-box strong { color: #4ade80; }
 
-/* Download button */
+/* Full ZIP download button */
 .dl-wrap {
   display: flex;
   justify-content: center;
+  margin-bottom: 0;
 }
 
 .dl-btn {
@@ -139,5 +295,125 @@
   width: 18px;
   height: 18px;
   flex-shrink: 0;
+}
+
+/* Per-participant section */
+.per-part-section {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* Participant cards grid — 5 per row, fills the full width */
+.part-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Large card style matching original design */
+.part-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.6rem 1rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.18s, border-color 0.18s, transform 0.15s, box-shadow 0.18s;
+  cursor: pointer;
+  min-height: 120px;
+}
+
+.part-card:hover {
+  background: rgba(74, 222, 128, 0.1);
+  border-color: rgba(74, 222, 128, 0.55);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(74, 222, 128, 0.12);
+}
+
+.part-card-icon {
+  width: 36px;
+  height: 36px;
+  color: var(--muted);
+  transition: color 0.18s;
+}
+
+.part-card:hover .part-card-icon {
+  color: #4ade80;
+}
+
+.part-card-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.part-card-label {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.part-card-sub {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  opacity: 0.8;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 0.6rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+}
+
+.page-btn:hover:not(:disabled):not(.active) {
+  background: rgba(74, 222, 128, 0.1);
+  border-color: rgba(74, 222, 128, 0.4);
+  color: #4ade80;
+}
+
+.page-btn.active {
+  background: #4ade80;
+  border-color: #4ade80;
+  color: #0f1a2e;
+}
+
+.page-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .part-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 </style>
