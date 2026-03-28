@@ -84,7 +84,7 @@ const navLinks = [
 .nav-link {
   display: inline-block;
   padding: 8px 16px;
-  border: 1.5px solid #d1d5db;
+  border: none;
   border-radius: 6px;
   color: #333333;
   background-color: #ffffff;
@@ -95,27 +95,17 @@ const navLinks = [
   transition: all 0.3s;
   white-space: nowrap;
   position: relative;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.10), 0 0.5px 1.5px rgba(0,0,0,0.07);
-}
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #42b883;
-  transition: width 0.3s;
+  box-shadow:
+    0 0 0 1.5px rgba(0,0,0,0.14),
+    0 0 8px 3px rgba(0,0,0,0.18),
+    0 0 20px 6px rgba(0,0,0,0.10);
 }
 .nav-link:hover {
   background-color: #ffffff;
   color: #000000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-color: #42b883;
+  border: 2px solid #42b883;
   transform: translateY(-2px);
-}
-.nav-link:hover::after {
-  width: 100%;
 }
 
 /* Image area: same max-width as card, flush below it, rounded bottom */
