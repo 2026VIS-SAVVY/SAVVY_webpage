@@ -1,5 +1,6 @@
 <template>
   <section class="hero-wrap">
+    <!-- White title card: title + nav only -->
     <div class="hero-card">
       <h1 class="paper-title">
         SAVVY: Student Attention Visualization for Video-based Learning Analysis
@@ -9,18 +10,18 @@
           {{ link.label }}
         </a>
       </nav>
+    </div>
 
-      <!-- Teaser image area inside hero card, like HyperMOOC -->
-      <div class="hero-teaser">
-        <div class="hero-teaser-ph">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" class="teaser-ph-icon">
-            <rect x="4" y="8" width="40" height="32" rx="3"/>
-            <circle cx="16" cy="20" r="4"/>
-            <path d="M4 32 l10-8 8 6 8-10 14 12"/>
-          </svg>
-          <span class="teaser-ph-label">Teaser Figure</span>
-          <span class="teaser-ph-hint">Replace with your paper's teaser figure (e.g., system overview, key results)</span>
-        </div>
+    <!-- Image placeholder area: same width as card, directly below it -->
+    <div class="hero-img-wrap">
+      <div class="hero-img-ph">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" class="img-ph-icon">
+          <rect x="4" y="8" width="40" height="32" rx="3"/>
+          <circle cx="16" cy="20" r="4"/>
+          <path d="M4 32 l10-8 8 6 8-10 14 12"/>
+        </svg>
+        <span class="img-ph-label">Paper Figure / System Overview</span>
+        <span class="img-ph-hint">Replace with your paper's figure (e.g., system architecture, pipeline overview)</span>
       </div>
     </div>
   </section>
@@ -28,6 +29,7 @@
 
 <script setup>
 const navLinks = [
+  { href: '#teaser',     label: 'Teaser' },
   { href: '#abstract',   label: 'Abstract' },
   { href: '#video',      label: 'Video' },
   { href: '#dataset',    label: 'Dataset' },
@@ -37,24 +39,29 @@ const navLinks = [
 </script>
 
 <style scoped>
+/* Outer section: gradient bg, column flex so card and img-wrap stack */
 .hero-wrap {
   width: 100%;
   box-sizing: border-box;
   background: linear-gradient(150deg, #13131f 0%, #16213e 55%, #0f3460 100%);
   padding: clamp(32px, 6vw, 60px) clamp(16px, 4vw, 24px) clamp(28px, 5vw, 52px);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
 }
+
+/* White title card */
 .hero-card {
   background: #ffffff;
-  border-radius: 20px;
-  padding: clamp(28px, 5vw, 52px) clamp(20px, 6vw, 56px) 0;
+  border-radius: 20px 20px 0 0;
+  padding: clamp(28px, 5vw, 52px) clamp(20px, 6vw, 56px) clamp(24px, 4vw, 44px);
   max-width: 1100px;
   width: 100%;
   text-align: center;
-  box-shadow: 0 8px 40px rgba(0,0,0,.45);
-  overflow: hidden;
+  box-shadow: 0 4px 0 rgba(0,0,0,.15);
 }
+
 .paper-title {
   font-family: Arial, sans-serif;
   font-size: clamp(1.4rem, 3.2vw, 2.2rem);
@@ -66,13 +73,14 @@ const navLinks = [
   word-break: keep-all;
   overflow-wrap: break-word;
 }
+
 .hero-nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 8px;
-  margin-bottom: clamp(24px, 4vw, 40px);
 }
+
 .nav-link {
   display: inline-block;
   padding: 8px 16px;
@@ -109,15 +117,18 @@ const navLinks = [
   width: 100%;
 }
 
-/* Teaser area inside hero card */
-.hero-teaser {
+/* Image area: same max-width as card, flush below it, rounded bottom */
+.hero-img-wrap {
+  max-width: 1100px;
   width: 100%;
-  margin: 0 -0px;
-  border-top: 1px solid #e5e7eb;
+  border-radius: 0 0 20px 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,.45);
 }
-.hero-teaser-ph {
+
+.hero-img-ph {
   width: 100%;
-  min-height: clamp(220px, 35vw, 460px);
+  min-height: clamp(200px, 30vw, 420px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,37 +136,34 @@ const navLinks = [
   gap: 10px;
   background: #f3f4f6;
   color: #9ca3af;
-  padding: 2.5rem 2rem;
+  padding: 2.5rem 1rem;
+  border-top: 1px solid #e5e7eb;
+  box-sizing: border-box;
 }
-.teaser-ph-icon {
-  width: clamp(40px, 6vw, 56px);
-  height: clamp(40px, 6vw, 56px);
-  opacity: 0.4;
+
+.img-ph-icon {
+  width: clamp(40px, 6vw, 52px);
+  height: clamp(40px, 6vw, 52px);
+  opacity: 0.38;
   margin-bottom: 4px;
 }
-.teaser-ph-label {
+.img-ph-label {
   font-family: Arial, sans-serif;
   font-size: clamp(0.85rem, 2vw, 1rem);
   font-weight: 600;
   color: #6b7280;
 }
-.teaser-ph-hint {
+.img-ph-hint {
   font-family: Arial, sans-serif;
   font-size: clamp(0.75rem, 1.8vw, 0.85rem);
   color: #9ca3af;
-  max-width: 380px;
+  max-width: 400px;
   line-height: 1.5;
   text-align: center;
 }
 
-/* Actual teaser image (when replacing placeholder) */
-.hero-teaser-img {
-  width: 100%;
-  display: block;
-  border-top: 1px solid #e5e7eb;
-}
-
 @media (max-width: 480px) {
-  .hero-card { border-radius: 14px; }
+  .hero-card { border-radius: 14px 14px 0 0; }
+  .hero-img-wrap { border-radius: 0 0 14px 14px; }
 }
 </style>
