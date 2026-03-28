@@ -156,7 +156,7 @@ const plugins = isGitHubPages
 
 
 export default defineConfig({
-  base: process.env.GITHUB_PAGES === 'true' ? '/SAVVY_webpage/' : '/',
+  base: process.env.GITHUB_PAGES === 'true' ? '/SAVVY/' : '/',
   plugins,
   resolve: {
     alias: {
