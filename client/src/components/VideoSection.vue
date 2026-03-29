@@ -4,14 +4,20 @@
       <h2 class="sec-title">Video</h2>
       <div class="divider"></div>
 
-      <!-- 主视频占位 — 替换为 <video> 或 YouTube <iframe> -->
+      <!-- 主视频区域 -->
       <div class="video-wrap">
-        <div class="ph-box video-ph">
-          <span class="ph-icon">▶</span>
-          <p class="ph-label">Main Demo Video</p>
-          <p class="ph-hint">Replace with &lt;video&gt; or YouTube &lt;iframe&gt;</p>
-        </div>
+        <video
+          class="main-video"
+          controls
+          preload="metadata"
+          poster=""
+        >
+          <source src="https://dataset-1341757241.cos.ap-nanjing.myqcloud.com/cat_test_gen.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
+
+      <p class="video-caption">Main Demo Video</p>
     </div>
   </section>
 </template>
@@ -37,17 +43,21 @@
   overflow: hidden;
   box-shadow: 0 4px 32px rgba(0,0,0,.4);
   border: 1px solid var(--border);
+  background: #000;
 }
-.video-ph {
+.main-video {
   width: 100%;
+  display: block;
   aspect-ratio: 16/9;
-  background: rgba(255,255,255,0.07);
-  flex-direction: column;
-  gap: 10px;
-  border-radius: 0;
-  border: none;
+  object-fit: contain;
+  background: #000;
 }
-.ph-icon  { font-size: clamp(2rem, 5vw, 3rem); opacity: .4; }
-.ph-label { font-size: clamp(0.85rem, 2vw, 1rem); font-weight: 600; color: var(--muted); }
-.ph-hint  { font-size: clamp(0.75rem, 1.8vw, 0.85rem); color: var(--muted); text-align: center; opacity: .75; }
+.video-caption {
+  text-align: center;
+  margin-top: 1rem;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: var(--muted);
+  opacity: 0.75;
+}
 </style>
