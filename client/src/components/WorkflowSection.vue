@@ -1,7 +1,8 @@
 <template>
   <section id="workflow" class="section-dark sec-pad">
     <div class="workflow-inner">
-      <h2 class="section-title">Workflow</h2>
+      <h2 class="sec-title">Workflow</h2>
+      <div class="divider"></div>
       <img
         src="/images/workflow.jpg"
         alt="SAVVY System Workflow"
@@ -20,13 +21,13 @@
   padding-left: clamp(16px, 4vw, 40px);
   padding-right: clamp(16px, 4vw, 40px);
 }
-.section-title {
+.sec-title {
   font-family: Arial, sans-serif;
-  font-size: clamp(1.4rem, 2.8vw, 1.8rem);
+  font-size: 28.8px;
   font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 24px;
-  text-align: left;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 12px;
 }
 .workflow-img {
   width: 100%;
