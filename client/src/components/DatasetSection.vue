@@ -11,14 +11,22 @@
     <div class="processing-full-wrap">
       <div class="processing-img-box">
         <img
-          src="/images/dataset_preview.jpg"
-          alt="Dataset sample preview (Sxx)"
+          src="/images/dataset_table1.jpg"
+          alt="Dataset sample: EEG & Motion data (Sxx)"
+          class="processing-img"
+        />
+      </div>
+      <div class="processing-img-box" style="margin-top:1rem;">
+        <img
+          src="/images/dataset_table2.jpg"
+          alt="Dataset sample: fNIRS data (Sxx)"
           class="processing-img"
         />
       </div>
       <div class="inner">
       <p class="processing-note">
-        <strong>Note:</strong> The table above is a <em>sample illustration</em> of the dataset format.
+        <strong>Note:</strong> The tables above are a <em>sample illustration</em> of the dataset format,
+        split by signal type (EEG &amp; Motion / fNIRS).
         The column structure and data types faithfully reflect the actual recordings, but all numerical
         values shown are <strong>simulated and do not represent real experimental measurements</strong>.
         The complete dataset with authentic data will be made publicly available upon acceptance of the paper.
