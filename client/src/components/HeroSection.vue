@@ -12,17 +12,13 @@
       </nav>
     </div>
 
-    <!-- Image placeholder area: same width as card, directly below it -->
+    <!-- Paper figure area: same width as card, directly below it -->
     <div class="hero-img-wrap">
-      <div class="hero-img-ph">
-        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" class="img-ph-icon">
-          <rect x="4" y="8" width="40" height="32" rx="3"/>
-          <circle cx="16" cy="20" r="4"/>
-          <path d="M4 32 l10-8 8 6 8-10 14 12"/>
-        </svg>
-        <span class="img-ph-label">Paper Figure / System Overview</span>
-        <span class="img-ph-hint">Replace with your paper's figure (e.g., system architecture, pipeline overview)</span>
-      </div>
+      <img
+        src="/SAVVY/images/fig2.jpg"
+        alt="Paper Figure / System Overview"
+        class="hero-fig-img"
+      />
     </div>
   </section>
 </template>
@@ -115,42 +111,13 @@ const navLinks = [
   border-radius: 0 0 20px 20px;
   overflow: hidden;
   box-shadow: 0 8px 40px rgba(0,0,0,.45);
+  background: #ffffff;
 }
 
-.hero-img-ph {
+.hero-fig-img {
   width: 100%;
-  min-height: clamp(200px, 30vw, 420px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: #f3f4f6;
-  color: #9ca3af;
-  padding: 2.5rem 1rem;
-  border-top: 1px solid #e5e7eb;
-  box-sizing: border-box;
-}
-
-.img-ph-icon {
-  width: clamp(40px, 6vw, 52px);
-  height: clamp(40px, 6vw, 52px);
-  opacity: 0.38;
-  margin-bottom: 4px;
-}
-.img-ph-label {
-  font-family: Arial, sans-serif;
-  font-size: clamp(0.85rem, 2vw, 1rem);
-  font-weight: 600;
-  color: #6b7280;
-}
-.img-ph-hint {
-  font-family: Arial, sans-serif;
-  font-size: clamp(0.75rem, 1.8vw, 0.85rem);
-  color: #9ca3af;
-  max-width: 400px;
-  line-height: 1.5;
-  text-align: center;
+  display: block;
+  object-fit: contain;
 }
 
 @media (max-width: 480px) {
