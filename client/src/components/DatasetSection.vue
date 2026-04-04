@@ -7,16 +7,18 @@
       <!-- ① Dataset Processing -->
       <h3 class="sub-title">Dataset Processing</h3>
       <div class="processing-img-box">
-        <div class="processing-placeholder">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" class="ph-icon">
-            <rect x="4" y="8" width="40" height="32" rx="3"/>
-            <circle cx="16" cy="20" r="4"/>
-            <path d="M4 32 l10-8 8 6 8-10 14 12"/>
-          </svg>
-          <span>Dataset Processing Figure</span>
-          <span class="ph-hint">Replace with your dataset processing pipeline figure</span>
-        </div>
+        <img
+          src="/images/dataset_preview.jpg"
+          alt="Dataset sample preview (Sxx)"
+          class="processing-img"
+        />
       </div>
+      <p class="processing-note">
+        <strong>Note:</strong> The table above is a <em>sample illustration</em> of the dataset format.
+        The column structure and data types faithfully reflect the actual recordings, but all numerical
+        values shown are <strong>simulated and do not represent real experimental measurements</strong>.
+        The complete dataset with authentic data will be made publicly available upon acceptance of the paper.
+      </p>
 
       <!-- ② Dataset Description -->
       <h3 class="sub-title">Dataset Description</h3>
@@ -178,49 +180,36 @@ const currentPageParticipants = computed(() => {
   letter-spacing: 0.01em;
 }
 
-/* Processing image placeholder */
+/* Processing image */
 .processing-img-box {
   max-width: 100%;
-  margin: 0 auto 2.5rem;
+  margin: 0 auto 1.2rem;
   border-radius: 12px;
   overflow: hidden;
-  background: rgba(255,255,255,0.04);
   border: 1px solid var(--border);
-  min-height: 380px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #ffffff;
 }
 
-.processing-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-  color: var(--muted);
-  padding: 3rem 2rem;
-  text-align: center;
+.processing-img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
 }
 
-.ph-icon {
-  width: 52px;
-  height: 52px;
-  opacity: 0.35;
-  margin-bottom: 0.4rem;
-}
-
-.processing-placeholder span {
+.processing-note {
   font-family: Arial, sans-serif;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14px;
   color: var(--muted);
+  line-height: 1.75;
+  margin: 0 auto 2.5rem;
+  padding: 0.85rem 1.2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 3px solid rgba(74, 222, 128, 0.55);
+  border-radius: 0 8px 8px 0;
 }
 
-.ph-hint {
-  font-size: 13px !important;
-  font-weight: 400 !important;
-  opacity: 0.65;
-}
+.processing-note strong { color: #e2e8f0; }
+.processing-note em { color: #fbbf24; font-style: normal; font-weight: 600; }
 
 .ds-desc {
   font-family: Arial, sans-serif;
