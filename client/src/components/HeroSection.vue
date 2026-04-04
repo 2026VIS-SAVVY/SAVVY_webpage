@@ -15,7 +15,7 @@
     <!-- Paper figure area: same width as card, directly below it -->
     <div class="hero-img-wrap">
       <img
-        src="/SAVVY/images/fig2.jpg"
+        src="/images/fig2.jpg"
         alt="Paper Figure / System Overview"
         class="hero-fig-img"
       />
