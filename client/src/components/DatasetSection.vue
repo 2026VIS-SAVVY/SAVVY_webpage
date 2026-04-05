@@ -25,10 +25,10 @@
       </div>
       <div class="inner">
       <p class="processing-note">
-        <strong>Note:</strong> The tables above are a <em>sample illustration</em> of the dataset format,
+        <strong>Note:</strong> The tables above show a <em>representative data excerpt</em> of the dataset format,
         split by signal type (EEG &amp; Motion / fNIRS).
         The column structure and data types faithfully reflect the actual recordings, but all numerical
-        values shown are <strong>simulated and do not represent real experimental measurements</strong>.
+        values shown are <strong>illustrative and do not represent real experimental measurements</strong>.
         The complete dataset with authentic data will be made publicly available upon acceptance of the paper.
       </p>
       </div>
@@ -48,6 +48,57 @@
         establish ground-truth labels of three attention levels: high, medium, and low. The dataset
         contains over 4.5 million data points in total.
       </p>
+
+      <!-- Field descriptions -->
+      <h3 class="sub-title" style="margin-top:2rem;">Data Field Descriptions</h3>
+      <div class="field-table-wrap">
+        <table class="field-table">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="field-name">TIMESTAMP</td>
+              <td>Unix timestamp in milliseconds, recording the exact time of each data sample.</td>
+            </tr>
+            <tr>
+              <td class="field-name">EEG.PKN</td>
+              <td>EEG packet number. Increments with each transmitted EEG data packet from the headband; used to detect packet loss.</td>
+            </tr>
+            <tr>
+              <td class="field-name">EEG.FP1 / EEG.FP2</td>
+              <td>Raw EEG voltage (μV) from the two prefrontal electrodes Fp1 and Fp2, sampled at 128 Hz.</td>
+            </tr>
+            <tr>
+              <td class="field-name">FNIRS.PKN</td>
+              <td>fNIRS packet number. Increments with each transmitted fNIRS data packet; used to detect packet loss.</td>
+            </tr>
+            <tr>
+              <td class="field-name">FNIRS.SxDy.735 / .850</td>
+              <td>Raw fNIRS light intensity (a.u.) for source–detector pair SxDy at 735 nm and 850 nm wavelengths, sampled at 25 Hz. Eight channel pairs (S1D1–S1D4, S2D5–S2D8) cover the prefrontal cortex. These raw values are converted to HbO and HbR concentration changes via the Modified Beer–Lambert Law during preprocessing.</td>
+            </tr>
+            <tr>
+              <td class="field-name">ACCEL.X / .Y / .Z</td>
+              <td>3-axis accelerometer readings (g) from the headband's inertial measurement unit (IMU), capturing head movement and orientation.</td>
+            </tr>
+            <tr>
+              <td class="field-name">GYRO.X / .Y / .Z</td>
+              <td>3-axis gyroscope readings (deg/s) from the IMU, capturing angular velocity of head rotation.</td>
+            </tr>
+            <tr>
+              <td class="field-name">MARKER</td>
+              <td>Event marker indicating the type of attention-modulating stimulus delivered at that moment (e.g., auditory or visual distractor). A value of 0 indicates no stimulus.</td>
+            </tr>
+            <tr>
+              <td class="field-name">IS_LOSS</td>
+              <td>Data quality flag. A value of 1 indicates that this sample was affected by signal loss or corruption; 0 indicates a valid sample.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <!-- Partial release notice -->
       <div class="notice-box">
@@ -236,6 +287,69 @@ const currentPageParticipants = computed(() => {
   max-width: 100%;
   margin: 0 auto 2.5rem;
   text-align: left;
+}
+
+/* Field descriptions table */
+.field-table-wrap {
+  width: 100%;
+  margin-bottom: 2.5rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.field-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+}
+
+.field-table thead tr {
+  background: rgba(74, 222, 128, 0.12);
+  border-bottom: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.field-table thead th {
+  padding: 0.75rem 1.1rem;
+  text-align: left;
+  font-weight: 700;
+  color: #4ade80;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+}
+
+.field-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.field-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.field-table tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.field-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.field-table td {
+  padding: 0.7rem 1.1rem;
+  vertical-align: top;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.field-name {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #e2e8f0 !important;
+  white-space: nowrap;
+  width: 200px;
 }
 
 /* Notice box */
