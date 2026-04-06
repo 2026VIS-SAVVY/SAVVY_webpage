@@ -43,7 +43,7 @@
         Convolutional Neural Networks, Matrix Factorization, and Neurons and Synapses. Each session
         lasted approximately 30 ± 5.8 minutes. Signals were recorded using the LoongX
         Neurophysiological Headband, which simultaneously captures 2 EEG channels (Fp1, Fp2) at
-        128 Hz and 8 fNIRS channels (S1D1–S1D4, S2D5–S2D8) at 25 Hz, covering the prefrontal
+        125 Hz and 8 fNIRS channels (S1D1–S1D4, S2D5–S2D8) at 25 Hz, covering the prefrontal
         cortex. External attention-modulating stimuli were introduced during the experiment to
         establish ground-truth labels of three attention levels: high, medium, and low. The dataset
         contains over 4.5 million data points in total.
@@ -70,7 +70,7 @@
             </tr>
             <tr>
               <td class="field-name">EEG.FP1 / EEG.FP2</td>
-              <td>Raw EEG voltage (μV) from the two prefrontal electrodes Fp1 and Fp2, sampled at 128 Hz.</td>
+              <td>Raw EEG voltage (μV) from the two prefrontal electrodes Fp1 and Fp2, sampled at 125 Hz.</td>
             </tr>
             <tr>
               <td class="field-name">FNIRS.PKN</td>
