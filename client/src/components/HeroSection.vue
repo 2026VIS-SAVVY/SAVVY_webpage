@@ -29,7 +29,7 @@ const navLinks = [
   { href: '#abstract',   label: 'Abstract' },
   { href: '#video',      label: 'Video' },
   { href: '#dataset',    label: 'Dataset' },
-  { href: '#code',       label: 'Code' },
+  { href: '#code',       label: 'Attention Quantification Framework' },
   { href: '#references', label: 'References' },
 ]
 </script>
