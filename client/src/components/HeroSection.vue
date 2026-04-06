@@ -25,7 +25,7 @@
 
 <script setup>
 const navLinks = [
-  { href: '#teaser',     label: 'Teaser' },
+  { href: '#teaser',     label: 'Interface' },
   { href: '#abstract',   label: 'Abstract' },
   { href: '#video',      label: 'Video' },
   { href: '#dataset',    label: 'Dataset' },
