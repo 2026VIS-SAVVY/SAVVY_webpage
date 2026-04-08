@@ -1,6 +1,6 @@
 <template>
   <section id="video" class="section-dark sec-pad">
-    <div class="inner">
+    <div class="video-inner">
       <h2 class="sec-title">Video</h2>
       <div class="divider"></div>
 
