@@ -23,6 +23,15 @@
 </template>
 
 <style scoped>
+.video-inner {
+  max-width: 1100px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(16px, 4vw, 40px);
+  padding-right: clamp(16px, 4vw, 40px);
+}
+  
 .sec-title {
   font-family: Arial, sans-serif;
   font-size: 28.8px;
