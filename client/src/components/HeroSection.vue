@@ -1,131 +1,322 @@
 <template>
   <section class="hero-wrap">
-    <!-- Card 1: title + nav buttons -->
-    <div class="hero-card">
-      <h1 class="paper-title">
-        SAVVY: Student Attention Visualization for Video-based Learning Analysis
-      </h1>
-      <nav class="hero-nav">
-        <a v-for="link in navLinks" :key="link.href" :href="link.href" class="nav-link">
-          {{ link.label }}
-        </a>
-      </nav>
+    <div class="hero-screen">
+      <div class="hero-bg" :style="heroBackgroundStyle" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <div class="hero-center">
+          <div class="logo-stack">
+            <img
+              class="logo logo-vis"
+              :src="asset('images/vis2026-logo.svg')"
+              alt="IEEE VIS 2026"
+            />
+          </div>
+
+          <h1 class="paper-title">
+            <span class="title-line title-line-with-logo">
+              <span class="inline-logo-group">
+                <img
+                  class="inline-savvy-logo"
+                  :src="asset('images/savvy-system-logo.svg')"
+                  alt="SAVVY"
+                />
+                <span class="inline-logo-colon">:</span>
+              </span>
+              <span class="title-text-rest">Student Attention Visualization</span>
+            </span>
+            <span class="title-line">for Video-based Learning Analysis</span>
+          </h1>
+        </div>
+
+        <nav class="hero-nav" aria-label="Primary sections">
+          <a v-for="link in navLinks" :key="link.href" :href="link.href" class="nav-link">
+            {{ link.label }}
+          </a>
+        </nav>
+      </div>
     </div>
 
-    <!-- Card 2: paper figure, independent rounded card -->
-    <div class="hero-img-card">
-      <img
-        src="/images/fig2.jpg"
-        alt="Paper Figure / System Overview"
-        class="hero-fig-img"
-      />
+    <div class="hero-figure-section">
+      <div class="hero-figure-card">
+        <img
+          :src="asset('images/fig2.jpg')"
+          alt="Paper Figure / System Overview"
+          class="hero-fig-img"
+        />
+      </div>
     </div>
   </section>
 </template>
 
 <script setup>
+const asset = (relativePath) => `${import.meta.env.BASE_URL}${relativePath.replace(/^\/+/, '')}`
+
 const navLinks = [
-  { href: '#teaser',     label: 'Interface' },
-  { href: '#abstract',   label: 'Abstract' },
-  { href: '#video',      label: 'Video' },
-  { href: '#dataset',    label: 'Dataset' },
-  { href: '#code',       label: 'Attention Quantification Framework' },
+  { href: '#teaser', label: 'Interface' },
+  { href: '#abstract', label: 'Abstract' },
+  { href: '#video', label: 'Video' },
+  { href: '#dataset', label: 'Dataset' },
+  { href: '#code', label: 'Attention Quantification Framework' },
   { href: '#references', label: 'References' },
 ]
+
+const heroBackgroundStyle = {
+  backgroundImage: `url(${asset('images/teaser.jpg')})`,
+}
 </script>
 
 <style scoped>
-/* Outer section: gradient bg, column flex so the two cards stack */
 .hero-wrap {
   width: 100%;
-  box-sizing: border-box;
-  background: linear-gradient(150deg, #13131f 0%, #16213e 55%, #0f3460 100%);
-  padding: clamp(32px, 6vw, 60px) clamp(16px, 4vw, 24px) clamp(28px, 5vw, 52px);
+  background: #09131d;
+}
+
+.hero-screen {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.hero-bg,
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-bg {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: scale(1.08);
+  filter: blur(16px) saturate(0.95);
+}
+
+.hero-overlay {
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 26%, rgba(7, 16, 26, 0.40) 56%, rgba(7, 16, 26, 0.82) 100%),
+    linear-gradient(180deg, rgba(7, 16, 26, 0.30) 0%, rgba(7, 16, 26, 0.58) 68%, rgba(7, 16, 26, 0.90) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: min(1200px, calc(100% - 48px));
+  min-height: 100svh;
+  padding: clamp(36px, 5vw, 56px) 0 clamp(28px, 4vw, 44px);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-items: center;
+}
+
+.hero-center {
+  width: min(980px, 100%);
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  justify-content: center;
+  gap: clamp(14px, 2vw, 20px);
+  text-align: center;
 }
 
-/* Card 1: title + nav */
-.hero-card {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: clamp(28px, 5vw, 52px) clamp(20px, 6vw, 56px) clamp(24px, 4vw, 44px);
-  max-width: 1100px;
-  width: 100%;
-  text-align: center;
-  box-shadow:
-    0 4px 24px rgba(0,0,0,.18),
-    0 1.5px 0 rgba(0,0,0,.10);
+.logo-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.logo {
+  display: block;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.28));
+}
+
+.logo-vis {
+  width: min(360px, 62vw);
 }
 
 .paper-title {
-  font-family: Arial, sans-serif;
-  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
-  font-weight: 700;
-  color: #111827;
-  line-height: 1.35;
-  margin-bottom: 28px;
-  white-space: normal;
-  word-break: keep-all;
-  overflow-wrap: break-word;
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: clamp(2rem, 3.8vw, 4rem);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.62), 0 1px 2px rgba(0, 0, 0, 0.5), 0 0 2px rgba(0, 0, 0, 0.45), 0 16px 36px rgba(0, 0, 0, 0.5), 0 8px 20px rgba(0, 0, 0, 0.38);
+}
+
+.title-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.title-line-with-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 0.9vw, 14px);
+}
+
+.inline-logo-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  transform: translateY(0.02em);
+}
+
+.inline-savvy-logo {
+  width: clamp(208px, 13.6vw, 295px);
+  max-width: 43vw;
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1) drop-shadow(0 8px 24px rgba(0, 0, 0, 0.28));
+  transform: scaleY(1.08);
+  transform-origin: center bottom;
+  opacity: 0.98;
+}
+
+.inline-logo-colon {
+  display: inline-block;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.95em;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.title-text-rest {
+  display: inline-block;
 }
 
 .hero-nav {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
+  align-self: end;
 }
 
 .nav-link {
-  display: inline-block;
-  padding: 8px 16px;
-  border: 2px solid transparent;
-  border-radius: 6px;
-  color: #333333;
-  background-color: #ffffff;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.96rem;
   font-weight: 500;
   text-decoration: none;
-  transition: all 0.3s;
-  white-space: nowrap;
-  position: relative;
-  box-shadow:
-    0 0 0 1.5px rgba(0,0,0,0.14),
-    0 0 8px 3px rgba(0,0,0,0.18),
-    0 0 20px 6px rgba(0,0,0,0.10);
-}
-.nav-link:hover {
-  background-color: #ffffff;
-  color: #000000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-color: #42b883;
-  transform: translateY(-2px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  transition:
+    transform 0.22s ease,
+    background-color 0.22s ease,
+    border-color 0.22s ease;
 }
 
-/* Card 2: paper figure */
-.hero-img-card {
-  max-width: 1100px;
-  width: 100%;
-  border-radius: 20px;
+.nav-link:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+.hero-figure-section {
+  padding: clamp(32px, 5vw, 56px) clamp(16px, 4vw, 24px) clamp(44px, 6vw, 72px);
+  background: linear-gradient(180deg, #09131d 0%, #0d1824 100%);
+}
+
+.hero-figure-card {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow:
-    0 4px 24px rgba(0,0,0,.18),
-    0 1.5px 0 rgba(0,0,0,.10);
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
 }
 
 .hero-fig-img {
-  width: 100%;
   display: block;
+  width: 100%;
+  height: auto;
   object-fit: contain;
 }
 
-@media (max-width: 480px) {
-  .hero-card      { border-radius: 14px; }
-  .hero-img-card  { border-radius: 14px; }
+@media (max-width: 900px) {
+  .hero-content {
+    width: min(100%, calc(100% - 32px));
+  }
+
+  .paper-title {
+    line-height: 1.18;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-content {
+    padding-top: max(32px, env(safe-area-inset-top));
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+
+  .logo-stack {
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+
+  .logo-vis {
+    width: min(280px, 72vw);
+  }
+
+  .paper-title {
+    font-size: clamp(1.72rem, 8vw, 2.7rem);
+    line-height: 1.12;
+  }
+
+  .title-line {
+    white-space: normal;
+  }
+
+  .title-line-with-logo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .inline-logo-group {
+    gap: 3px;
+  }
+
+  .inline-savvy-logo {
+    width: min(170px, 45vw);
+    max-width: 100%;
+  }
+
+  .hero-nav {
+    gap: 10px;
+  }
+
+  .nav-link {
+    width: 100%;
+  }
+
+  .hero-figure-card {
+    border-radius: 18px;
+  }
 }
 </style>
