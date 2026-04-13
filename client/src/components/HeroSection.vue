@@ -132,7 +132,6 @@ onMounted(() => {
   if (props.animateOnReady) {
     startEntranceAnimation()
   }
-  window.addEventListener('pageshow', startEntranceAnimation)
 })
 
 watch(
@@ -151,7 +150,6 @@ onBeforeUnmount(() => {
   if (shadowTimer) {
     window.clearTimeout(shadowTimer)
   }
-  window.removeEventListener('pageshow', startEntranceAnimation)
 })
 </script>
 
@@ -299,26 +297,24 @@ onBeforeUnmount(() => {
   animation-delay: var(--delay, 0ms);
 }
 
-  .inline-logo-group {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    flex: 0 0 auto;
-    transform: translateY(0.02em);
-  }
+.inline-logo-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  transform: translateY(0.02em);
+}
 
-
-  .inline-savvy-logo {
-    width: clamp(208px, 13.6vw, 295px);
-    max-width: 43vw;
-    flex: 0 0 auto;
-    object-fit: contain;
-    filter: brightness(0) invert(1) drop-shadow(0 8px 24px rgba(0, 0, 0, 0.28));
-    transform: translateY(2px) scaleY(1.12);
-    transform-origin: center bottom;
-    opacity: 0.98;
-  }
-
+.inline-savvy-logo {
+  width: clamp(208px, 13.6vw, 295px);
+  max-width: 43vw;
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1) drop-shadow(0 8px 24px rgba(0, 0, 0, 0.28));
+  transform: translateY(2px) scaleY(1.12);
+  transform-origin: center bottom;
+  opacity: 0.98;
+}
 
 .inline-logo-colon {
   display: inline-block;
@@ -500,20 +496,22 @@ onBeforeUnmount(() => {
   }
 
   .inline-savvy-logo {
-    width: min(170px, 45vw);
-    max-width: 100%;
+    width: clamp(160px, 38vw, 220px);
+    transform: translateY(1px) scaleY(1.1);
+  }
+
+  .inline-logo-colon {
+    font-size: 0.9em;
   }
 
   .hero-nav {
-    gap: 10px;
+    gap: 8px;
   }
 
   .nav-link {
-    width: 100%;
-  }
-
-  .hero-figure-card {
-    border-radius: 18px;
+    min-height: 38px;
+    padding: 8px 14px;
+    font-size: 0.9rem;
   }
 }
 </style>
